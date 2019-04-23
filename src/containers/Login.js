@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Auth } from "aws-amplify";
+import { Link } from "react-router-dom";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 import "./Login.css";
@@ -69,6 +70,7 @@ export default class Login extends Component {
             text="Login"
             loadingText="Logging in…"
           />
+          <Link to="/login/reset">Forgot password?</Link>
         </form>
       </div>
     );
