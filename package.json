@@ -13,9 +13,13 @@
     "react-stripe-elements": "^2.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_STAGE=dev react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "predeploy": "REACT_APP_STAGE=dev npm run build",
+    "deploy": "aws s3 sync build/ s3://notes-app-2-api-dev-attachmentsbucket-4v15nei8x1xq",
+    "predeploy:prod": "REACT_APP_STAGE=production npm run build",
+    "deploy:prod": "aws s3 sync build/ s3://notes-app-2-api-prod-attachmentsbucket-v1ieimad65u2",
     "eject": "react-scripts eject"
   },
   "browserslist": [

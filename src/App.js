@@ -3,6 +3,7 @@ import { Auth } from "aws-amplify";
 import { Link, withRouter } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import config from "./config";
 import Routes from "./Routes";
 import "./App.css";
 
@@ -16,7 +17,28 @@ class App extends Component {
     };
   }
 
+  loadFacebookSDK() {
+    window.fbAsyncInit = function() {
+      window.FB.init({
+        appId            : config.social.FB,
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v3.1'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "https://connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  }
+
   async componentDidMount() {
+    this.loadFacebookSDK();
+
     try {
       await Auth.currentSession();
       this.userHasAuthenticated(true);

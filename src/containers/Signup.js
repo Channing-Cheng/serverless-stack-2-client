@@ -7,6 +7,7 @@ import {
 } from "react-bootstrap";
 import { Auth } from "aws-amplify";
 import LoaderButton from "../components/LoaderButton";
+import FacebookButton from "../components/FacebookButton";
 import "./Signup.css";
 
 export default class Signup extends Component {
@@ -78,6 +79,10 @@ export default class Signup extends Component {
     }
   }
 
+  handleFbLogin = () => {
+    this.props.userHasAuthenticated(true);
+  };
+
   renderConfirmationForm() {
     return (
       <form onSubmit={this.handleConfirmationSubmit}>
@@ -106,42 +111,49 @@ export default class Signup extends Component {
 
   renderForm() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <ControlLabel>Email</ControlLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            value={this.state.password}
-            onChange={this.handleChange}
-            type="password"
-          />
-        </FormGroup>
-        <FormGroup controlId="confirmPassword" bsSize="large">
-          <ControlLabel>Confirm Password</ControlLabel>
-          <FormControl
-            value={this.state.confirmPassword}
-            onChange={this.handleChange}
-            type="password"
-          />
-        </FormGroup>
-        <LoaderButton
-          block
-          bsSize="large"
-          disabled={!this.validateForm()}
-          type="submit"
-          isLoading={this.state.isLoading}
-          text="Signup"
-          loadingText="Signing up…"
+      <React.Fragment>
+        <FacebookButton
+          onLogin={this.handleFbLogin}
         />
-      </form>
+        <hr />
+
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <FormGroup controlId="confirmPassword" bsSize="large">
+            <ControlLabel>Confirm Password</ControlLabel>
+            <FormControl
+              value={this.state.confirmPassword}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <LoaderButton
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+            isLoading={this.state.isLoading}
+            text="Signup"
+            loadingText="Signing up…"
+          />
+        </form>
+      </React.Fragment>
     );
   }
 

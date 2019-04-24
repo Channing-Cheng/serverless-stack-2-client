@@ -13,7 +13,10 @@ const dev = {
     APP_CLIENT_ID: "2liti6fvchbkjrj8bk2nq71kc8",
     IDENTITY_POOL_ID: "us-east-1:f2af9730-ed37-42dc-881c-1dc1ff10f1fb"
   },
-  STRIPE_KEY: "pk_test_dpw5nOETG3RiKV2TjQYOriQ100jbOwHbSJ"
+  STRIPE_KEY: "pk_test_dpw5nOETG3RiKV2TjQYOriQ100jbOwHbSJ",
+  social: {
+    FB: "1075064739347645"
+  }
 };
 
 const prod = {
